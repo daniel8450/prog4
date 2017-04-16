@@ -11,7 +11,7 @@ echo "public static int sum(int n)"
 echo "{"
 echo ";"
 echo "int count;"
-echo "int accumulator = 0;
+echo "int accumulator = 0;"
 echo "for( THIS LINE IS WRONG)count1n1{"
 echo ";"
 echo "accumulator = accumulator + count;"
