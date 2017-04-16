@@ -6,7 +6,7 @@ classes = $(src:%.java=%.class)
 all: $(bin) $(classes)
 
 % : %.java
-	$(JC) $<
+	$(JC)
 
 clean :
 	rm -f $(bin) *.class run
