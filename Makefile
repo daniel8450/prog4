@@ -9,7 +9,7 @@ all: $(bin) $(classes)
 	$(JC) $<
 
 clean :
-	rm -f $(bin) $(classes) run babelfish$Token.class bablefish$type.class
+	rm -f $(bin) $(classes) run babelfishToken.class bablefishtype.class
 
 
 
