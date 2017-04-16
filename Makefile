@@ -1,12 +1,11 @@
+JC = javac
 src = $(wildcard *.java)
-bin = $(src:%.java=%)
-hi  = $(src:%.java=%.hi)
-obj = $(src:%.java=%.o)
+classes = $(src:.java=.class)
 
-all : $(bin)
+all: $(classes)
 
-% : %.java
-	javac $@
+clean :
+	rm -f *.class
 
-clean:
-	rm -f $(bin) $(hi) $(obj) run
+%.class : %.java
+	$(JC) $<
