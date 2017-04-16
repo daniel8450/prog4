@@ -1,12 +1,12 @@
-src = $(wildcard *.hs)
-bin = $(src:%.hs=%)
-hi  = $(src:%.hs=%.hi)
-obj = $(src:%.hs=%.o)
+src = $(wildcard *.java)
+bin = $(src:%.java=%)
+hi  = $(src:%.java=%.hi)
+obj = $(src:%.java=%.o)
 
 all : $(bin)
 
-% : %.hs
-	ghc $@
+% : %.java
+	javac $@
 
 clean:
 	rm -f $(bin) $(hi) $(obj) run
