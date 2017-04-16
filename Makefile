@@ -5,9 +5,11 @@ classes = $(src:%.java=%.class)
 
 all: $(bin) $(classes)
 
+%.class : %.java
+	$(JC) $<
+
 clean :
 	rm -f $(bin) $(classes) run
 
-%.class : %.java
-	$(JC) $<
+
 
