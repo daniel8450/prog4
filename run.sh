@@ -1,7 +1,5 @@
 #!/bin/bash
 
-view README.md
-
 echo
-echo "///babelfish///"
+echo "///BABELFISH, I partially got the Java translation working, but no other languages are supported at this time.///"
 ./babelfish
