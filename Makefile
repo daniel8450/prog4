@@ -3,8 +3,7 @@ src = $(wildcard *.java)
 bin =  $(src:%.java=%)
 classes = $(src:%.java=%.class)
 
-all: $(bin)
-     $(classes)
+all: $(bin) $(classes)
 
 clean :
 	rm -f $(bin) $(classes) run
