@@ -2,7 +2,7 @@
 
 echo
 echo "///BABELFISH///"
-echo "Translations for Java, C, and Python///"
+echo "Translations for Java, C, and Python. Only works with sum.alg right now. Also the semicolons are not correct///"
 echo
 echo "////JAVA////"
 echo "1" | java babelfish
