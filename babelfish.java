@@ -4,26 +4,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 public class babelfish {
-	
+
 	public static enum type{
 		LPAREN, RPAREN, LBRACK, RBRACK, STRING, INT, VAR, IF, FOR,
 		PLUS, MINUS, MULTIPLY, DIVIDE, EQUALS, SEMICOLON, RETURN,
-		TRUE, FALSE, SEMI, FUNCTION, CALL, NUMBER
+		TRUE, FALSE, SEMI, FUNCTION, CALL, NUMBER, NONE
 	}
-	
+
 	public static class Token{
 		public final type x;
 		public final String y;
-	
+
 		public Token(type x, String y){
 			this.x = x;
 			this.y = y;
 		}
-		
+
 		public type getType(){
 			return x;
 		}
-		
+
 		public String toString(){
 			if(x == type.VAR || x == type.NUMBER){
 				return y;
@@ -32,7 +32,7 @@ public class babelfish {
 			}
 		}
 	}
-	
+
 	public static String getVar(String x, int y ){
 		int i = y;
 		for( ; i < x.length();){
@@ -44,7 +44,7 @@ public class babelfish {
 		}
 		return x.substring(y,i);
 	}
-	
+
 	public static boolean isInt(String s){
 		for(int i = 0; i < s.length(); i++){
 			if(i == 0 && s.charAt(i) == '-')
@@ -54,7 +54,7 @@ public class babelfish {
 		}
 		return true;
 	}
-	
+
 
 	public static List<Token> lex(String in){
 		String temp;
@@ -97,7 +97,7 @@ public class babelfish {
 					i++;
 				} else{
 					String var = getVar(in, i);
-					i += var.length();			
+					i += var.length();
                     switch(var){
 						case "integer":
 							list.add(new Token(type.INT, "int"));
@@ -135,50 +135,180 @@ public class babelfish {
 	}
 
 	public static void main(String[] args) {
-		
+		int s = 0;
+		int x = 0;
+		int v = 0;
+		int c = 0;
+		int b = 0;
+		int n = 0;
+		int temp = 0;
+		Token tmp1, tmp2, tmp3, tmp4;
+		tmp1 = new Token(type.NONE, "none");
+		tmp2 = new Token(type.NONE, "none");
+		tmp3 = new Token(type.NONE, "none");
+		tmp4 = new Token(type.NONE, "none");
+		ArrayList<Token> list2 = new ArrayList<Token>(50);
+
 		File file = new File("sum.alg");
 		try{
-		
+
+		Scanner sc2 = new Scanner(System.in);
 		Scanner sc = new Scanner(file);
+		temp = sc2.nextInt();
 		while(sc.hasNextLine()){
 			String input = sc.nextLine();
 			List<Token> tokens = lex(input);
+
+			for(Token t : tokens){
+				list2.add(s,t);
+
+				if(t.getType() == type.FOR){
+					c = 1;
+					v = s;
+				}
+
+				s++;
+			}
+
+			if(c == 1){
+				tmp1 = list2.get(v+1);
+				tmp2 = list2.get(v+2);
+				tmp3 = list2.get(v+3);
+				tmp4 = list2.get(v+4);
+			}
+
+////////////java/////////////////
 			for(Token t : tokens){
 				if(t.getType() == type.FUNCTION){
-					System.out.print("public static ");
+					switch(temp){
+						case 1:
+						System.out.print("public static ");
+						break;
+						case 2:
+						System.out.print("");
+						break;
+						case 3:
+						System.out.print("def ");
+						break;
+					}
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.INT){
-					System.out.print("int ");
+					switch(temp){
+						case 1:
+						System.out.print("int ");
+						break;
+						case 2:
+						System.out.print("int ");
+						break;
+						case 3:
+						System.out.print("");
+						break;
+					}
+
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.LPAREN){
+
 					System.out.print("(");
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.RPAREN){
-					System.out.print(")" + "\n");
+					System.out.print(")");
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.LBRACK){
-					System.out.print("{" + "\n");
+					switch(temp){
+						case 1:
+						System.out.print("{");
+						break;
+						case 2:
+						System.out.print("{");
+						break;
+						case 3:
+						System.out.print("");
+						break;
+					}
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.RBRACK){
-					System.out.print("}" + "\n");
+					switch(temp){
+						case 1:
+						System.out.print("}");
+						break;
+						case 2:
+						System.out.print("}");
+						break;
+						case 3:
+						System.out.print("");
+						break;
+					}
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.EQUALS){
 					System.out.print(" = ");
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.FOR){
-					System.out.print("for( THIS LINE IS WRONG)");
+					switch(temp){
+						case 1:
+						System.out.print("for("+tmp1+" = "+tmp2+"; "+tmp1+" < "+tmp3+
+						"; "+tmp1+" += "+tmp4+")");
+						break;
+						case 2:
+						System.out.print("for("+tmp1+" = "+tmp2+"; "+tmp1+" < "+tmp3+
+						"; "+tmp1+" = "+tmp1+" + "+tmp4+")");
+						break;
+						case 3:
+						System.out.print("for "+tmp1+" in range("+tmp2+","+tmp3+"):");
+						break;
+					}
+
+					b = 1;
+					n = 0;
 				} else if(t.getType() == type.CALL){
 					System.out.print("");
+					b = 0;
+					n = 0;
 				} else if(t.getType() == type.RETURN){
+					switch(temp){
+						case 1:
+
+						break;
+						case 2:
+						break;
+						case 3:
+						break;
+					}
+					System.out.println();
+					System.out.println("}");
 					System.out.print("return ");
+					b = 0;
+					n = 1;
 				} else if(t.getType() == type.PLUS){
 					System.out.print(" + ");
+					b = 0;
+					n = 0;
 				} else{
-					System.out.print(t);
+					if(b == 1){
+						System.out.print("");
+					}else if(n == 1){
+						System.out.print(t);
+						System.out.println();
+						System.out.print("}");
+					}else{
+						System.out.print(t);
+					}
+
 				}
+
 			}
-			System.out.println(";");
-			
+			System.out.println(" ");
 		}
-		
+
 		} catch (FileNotFoundException e){
 			e.printStackTrace();
 		}
-		
-		System.out.print("}");
 
 	}
 
