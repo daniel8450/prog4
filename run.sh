@@ -5,7 +5,7 @@ echo "///BABELFISH///"
 echo "Translations for Java, C, and Python///"
 echo "//// JAVA ////"
 java babelfish
-echo 1 | java babelfish
+echo "1" | java babelfish
 echo "////////////"
 echo "//// C ////"
 java babelfish
