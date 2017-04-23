@@ -271,15 +271,6 @@ public class babelfish {
 					b = 0;
 					n = 0;
 				} else if(t.getType() == type.RETURN){
-					switch(temp){
-						case 1:
-
-						break;
-						case 2:
-						break;
-						case 3:
-						break;
-					}
 					System.out.println();
 					System.out.println("}");
 					System.out.print("return ");
