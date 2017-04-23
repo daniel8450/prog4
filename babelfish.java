@@ -271,9 +271,23 @@ public class babelfish {
 					b = 0;
 					n = 0;
 				} else if(t.getType() == type.RETURN){
-					System.out.println();
-					System.out.println("}");
-					System.out.print("return ");
+					switch(temp){
+						case 1:
+						System.out.println();
+						System.out.println("}");
+						System.out.print("return ");
+						break;
+						case 2:
+						System.out.println();
+						System.out.println("}");
+						System.out.print("return ");
+						break;
+						case 3:
+						System.out.println();
+						System.out.print("return ");
+						break;
+					}
+					
 					b = 0;
 					n = 1;
 				} else if(t.getType() == type.PLUS){
@@ -286,7 +300,11 @@ public class babelfish {
 					}else if(n == 1){
 						System.out.print(t);
 						System.out.println();
-						System.out.print("}");
+						if(temp == 3){
+						System.out.print("");
+						}else{
+						System.out.print("}");	
+						}
 					}else{
 						System.out.print(t);
 					}
